@@ -452,8 +452,8 @@ plt.figure(figsize=(14, 6))
 sns.set_theme(style="whitegrid", font_scale=1.1)
 
 custom_palette = {
-    'Target Week (May 12–18)': '#1c5485',  # Vivid Slate Blue
-    'Rest of May': '#d1e1ec'              # Muted Ice Blue
+    'Target Week (May 12–18)': '#1c5485',
+    'Rest of May': '#d1e1ec'
 }
 
 # Create barplot with average line
@@ -697,6 +697,7 @@ NO2_COLUMN = 'NO2 (Stundenmittelwerte)'
 DAY_COLUMN = 'Day'
 
 # Merge the three datasets
+df_air_daily = airquality.groupby(DAY_COLUMN)[[O3_COLUMN, NO2_COLUMN]].mean().reset_index()
 df_merged = pd.merge(df_air_daily, df_weather, on='Day').sort_values('Day')
 
 # Create plots
@@ -735,7 +736,7 @@ sns.despine(left=True, bottom=True)
 
 for ax in [ax1, ax2]:
     ax.spines['bottom'].set_visible(True)
-    ax.spines['bottom'].set_color('#cccccc')    
+    ax.spines['bottom'].set_color('#cccccc')
     ax.spines['bottom'].set_linewidth(1.2)       
 
 plt.show()
